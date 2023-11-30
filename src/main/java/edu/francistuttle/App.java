@@ -1,6 +1,7 @@
 package edu.francistuttle;
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import com.sun.syndication.feed.synd.SyndCategoryImpl;
@@ -15,16 +16,17 @@ public class App
 {
     public static void main( String[] args ) throws Exception 
     {
-        File nasaXML = new File("C:\\Users\\ak1036178\\Desktop\\Hitgub\\aknasaparser\\src\\nasa.xml");
+        //File nasaXML = new File("C:\\Users\\ak1036178\\Desktop\\Hitgub\\aknasaparser\\src\\nasa.xml");
+        URL nasaURL = new URL("https://www.nasa.gov/rss/dyn/breaking_news.rss");
         SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new XmlReader(nasaXML));
+        SyndFeed feed = input.build(new XmlReader(nasaURL));
         
         System.out.println("Feed Title: " + feed.getTitle());
-        System.out.println("\tLink: " + feed.getLink());
-        System.out.println("\tDescription: " + feed.getDescription());
+        System.out.println("Link: " + feed.getLink());
+        System.out.println("Description: " + feed.getDescription());
         for (SyndEntry item : (List<SyndEntry>) feed.getEntries()) {
-            System.out.println("\t\tStory title: " + item.getTitle());
-            System.out.println("\t\t\tLink: " +  item.getLink());
+            System.out.println("\tStory title: " + item.getTitle());
+            System.out.println("\t\tLink: " +  item.getLink());
         }
     }
 }
